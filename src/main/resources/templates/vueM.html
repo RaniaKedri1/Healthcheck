@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Medecin Page</title>
+<link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+
+<div class="card">
+
+	<div class="card-header">
+
+		<h2>Liste des Medecins</h2></div>
+		<div class="container">	
+		<div class="text-end">
+			<a th:href="@{/formajoutM}" class="btn btn-success">Ajouter Medecin</a>
+		</div>
+
+	<div class="card-body" >
+
+		
+		<form method="get" action="/indexM">
+			Mot clé :
+			<input  type="text" name="mc" th:value="${mc}">
+			<button type="submit" class="btn btn-primary">Search</button>
+		</form>
+		
+<table class="table">
+
+  <thead>
+
+	 <tr>
+
+	<th>ID</th>
+
+    <th>Nom</th>
+
+    <th>Spécialité</th>
+	
+	<th>Email</th>
+	
+    <th>Action</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+ 
+ <tr th:each="me:${data}">
+
+	    <td th:text="${me.id}"></td>
+
+	    <td th:text="${me.nom}"></td>
+
+	    <td th:text="${me.specialite}"></td>
+
+	    <td th:text="${me.email}"></td>
+	    
+	    <td><a th:href="@{'/deleteM/'+${me.id}}" href="" class="btn btn-outline-danger fa fa-trash"></a>
+	    <a th:href="@{'/modifierM/'+${me.id}}" href="" class="btn btn-outline-warning fa fa-edit"></a></td>
+
+
+	  </tr>
+
+  </tbody>
+
+</table>
+
+	<ul class="nav nav-pills">
+		<li th:each="i,s:${pages}">
+		<a th:href="@{/indexM(mc=${mc},page=${s.index})}"
+		   th:text="${s.index+1}"
+		   th:class="${currentpage==s.index?'btn btn-secondary mc-1':'btn btn-outline-secondary ms-1'}"></a>
+			
+		</li>
+		</ul>
+	</div>
+
+</div>
+</div>
+</body>
+</html>
+ 
+ 
+ 
